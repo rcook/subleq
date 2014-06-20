@@ -8,6 +8,7 @@ src/sqasm/sqasm
 src/sqrun/.deps/
 src/sqrun/sqrun
 stamp-h1
+tmp/
 
 *.o
 

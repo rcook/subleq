@@ -1,0 +1,12 @@
+#!/bin/bash
+PROGRAM=sqasm
+SCRIPTPATH=$(readlink -f $0)
+SCRIPTDIR=$(dirname $SCRIPTPATH)
+INFILENAME=$(readlink -f $1)
+TMPDIR=$(dirname $(dirname $INFILENAME))/tmp
+TMPFILENAME=$TMPDIR/$(basename $INFILENAME)
+mkdir -p $TMPDIR/
+cp $INFILENAME $TMPFILENAME &&
+  cd $SCRIPTDIR &&
+  make -C src/$PROGRAM && src/$PROGRAM/$PROGRAM $TMPFILENAME
+
