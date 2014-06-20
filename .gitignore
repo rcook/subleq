@@ -1,0 +1,13 @@
+Makefile
+autom4te.cache/
+config.h
+config.log
+config.status
+src/sqasm/.deps/
+src/sqasm/sqasm
+src/sqrun/.deps/
+src/sqrun/sqrun
+stamp-h1
+
+*.o
+
