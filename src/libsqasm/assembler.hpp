@@ -7,6 +7,6 @@ namespace Assembler
 {
     void assemble(
         const std::string &fileName,
-        std::vector<char> &instructions);
+        std::vector<char> &ops,
+        const bool dumpSymbols = false);
 }
-

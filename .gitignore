@@ -20,4 +20,6 @@ tmp/
 *.o
 *.opensdf
 *.sdf
+*.sqobj
 *.suo
+*.user
