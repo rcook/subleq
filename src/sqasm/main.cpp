@@ -25,7 +25,7 @@ static void tokenize(const string &fileName, vector<string> &tokens)
 static void getAddresses(const vector<string> &tokens, map<string, char> &addresses)
 {
     cout << "Getting addresses" << endl;
-    for (auto address = 0; address < tokens.size(); ++address)
+    for (size_t address = 0; address < tokens.size(); ++address)
     {
         auto &token = tokens[address];
         auto colonIndex = token.find(':');
@@ -40,7 +40,7 @@ static void getAddresses(const vector<string> &tokens, map<string, char> &addres
 static void generateCode(const vector<string> &tokens, const map<string, char> &addresses, vector<char> &instructions)
 {
     cout << "Generating code" << endl;
-    for (auto address = 0; address < tokens.size(); ++address)
+    for (size_t address = 0; address < tokens.size(); ++address)
     {
         auto &token = tokens[address];
         auto colonIndex = token.find(':');
@@ -85,7 +85,7 @@ static void emit(const string &fileName, const vector<char> &instructions)
     }
 }
 
-static bool assemble(const string &fileName)
+static void assemble(const string &fileName)
 {
     vector<string> tokens;
     tokenize(fileName, tokens);

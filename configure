@@ -3090,7 +3090,7 @@ else
 fi
 
 
-AM_CXXFLAGS="-std=c++11 -I.."
+AM_CXXFLAGS="-std=c++11 -I.. -Werror -Wall"
 
 ac_config_headers="$ac_config_headers config.h"
 

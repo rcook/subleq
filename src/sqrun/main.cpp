@@ -31,7 +31,7 @@ static void dump(const string &message, char a, char b, char c)
 
 static void dump(const vector<char> &instructions, const size_t columnCount = 3)
 {
-    for (auto i = 0; i < instructions.size(); i += columnCount)
+    for (size_t i = 0; i < instructions.size(); i += columnCount)
     {
         cout << setw(4) << i << ":";
         auto upper = min(i + columnCount, instructions.size());
@@ -45,7 +45,7 @@ static void dump(const vector<char> &instructions, const size_t columnCount = 3)
 
 static void run(vector<char> &instructions, const bool trace = false)
 {
-    for (auto pc = 0; pc >= 0 && pc < instructions.size(); )
+    for (size_t pc = 0; pc >= 0 && pc < instructions.size(); )
     {
         if (trace)
         {
