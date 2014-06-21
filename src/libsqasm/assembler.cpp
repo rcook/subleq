@@ -9,82 +9,9 @@ using namespace std;
 
 #include "assembler.hpp"
 #include "common/util.hpp"
-
-class Cell
-{
-    Cell() = delete;
-    Cell(const Cell &) = delete;
-    Cell &operator=(const Cell &) = delete;
-    Cell(Cell &&) = delete;
-    Cell &operator=(Cell &&) = delete;
-
-public:
-    virtual ~Cell() { }
-    virtual string toString() const = 0;
-    virtual int emit(const map<string, int> &symbolTable) const = 0;
-    int address() const { return m_address; }
-
-protected:
-    Cell(int address) : m_address(address) { }
-
-private:
-    const int m_address;
-};
-
-class SymbolRefCell : public Cell
-{
-    SymbolRefCell();
-    SymbolRefCell(const SymbolRefCell &) = delete;
-    SymbolRefCell &operator=(const SymbolRefCell &) = delete;
-    SymbolRefCell(SymbolRefCell &&) = delete;
-    SymbolRefCell &operator=(SymbolRefCell &&) = delete;
-
-public:
-    SymbolRefCell(int address, const string &symbol) : Cell(address), m_symbol(symbol) { }
-
-    ~SymbolRefCell() { }
-
-    string toString() const { return Formatter() << "[symbolRef " << m_symbol << "]"; }
-
-    int emit(const map<string, int> &symbolTable) const
-    {
-        auto iter(symbolTable.find(m_symbol));
-        if (iter != symbolTable.end())
-        {
-            return iter->second;
-        }
-
-        throw runtime_error(Formatter() <<
-            "No such symbol \"" << m_symbol << "\" at address " << address());
-    }
-
-private:
-    const string m_symbol;
-};
-
-class ValueCell : public Cell
-{
-    ValueCell();
-    ValueCell(const ValueCell &) = delete;
-    ValueCell &operator=(const ValueCell &) = delete;
-    ValueCell(ValueCell &&) = delete;
-    ValueCell &operator=(ValueCell &&) = delete;
-
-public:
-    ValueCell(int address, int value) : Cell(address), m_value(value) { }
-
-    ~ValueCell() { }
-
-    string toString() const { return Formatter() << "[value " << m_value << "]"; }
-
-    int emit(const map<string, int> &symbolTable) const
-    {
-        return m_value;
-    }
-
-private:
-    const int m_value;
-};
+#include "cell.hpp"
+#include "symbol-ref-cell.hpp"
+#include "value-cell.hpp"
 
 static void parseToken(const string &token, int address, map<string, int> &symbolTable, vector<unique_ptr<Cell>> &cells)
 {

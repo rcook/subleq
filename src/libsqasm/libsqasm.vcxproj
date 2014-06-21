@@ -76,9 +76,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="assembler.cpp" />
+    <ClCompile Include="cell.cpp" />
+    <ClCompile Include="symbol-ref-cell.cpp" />
+    <ClCompile Include="value-cell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assembler.hpp" />
+    <ClInclude Include="cell.hpp" />
+    <ClInclude Include="symbol-ref-cell.hpp" />
+    <ClInclude Include="value-cell.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
