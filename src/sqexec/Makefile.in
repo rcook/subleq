@@ -76,8 +76,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = sqrun$(EXEEXT)
-subdir = src/sqrun
+bin_PROGRAMS = sqexec$(EXEEXT)
+subdir = src/sqexec
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -90,9 +90,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_sqrun_OBJECTS = main.$(OBJEXT)
-sqrun_OBJECTS = $(am_sqrun_OBJECTS)
-sqrun_DEPENDENCIES = ../libsqrun/libsqrun.a
+am_sqexec_OBJECTS = main.$(OBJEXT)
+sqexec_OBJECTS = $(am_sqexec_OBJECTS)
+sqexec_DEPENDENCIES = ../libsqasm/libsqasm.a ../libsqrun/libsqrun.a
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -134,8 +134,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(sqrun_SOURCES)
-DIST_SOURCES = $(sqrun_SOURCES)
+SOURCES = $(sqexec_SOURCES)
+DIST_SOURCES = $(sqexec_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -253,8 +253,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-sqrun_SOURCES = ../common/formatter.hpp ../common/util.hpp main.cpp
-sqrun_LDADD = ../libsqrun/libsqrun.a
+sqexec_SOURCES = ../common/formatter.hpp ../common/util.hpp main.cpp
+sqexec_LDADD = ../libsqasm/libsqasm.a ../libsqrun/libsqrun.a
 all: all-am
 
 .SUFFIXES:
@@ -268,9 +268,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/sqrun/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/sqexec/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/sqrun/Makefile
+	  $(AUTOMAKE) --foreign src/sqexec/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -332,9 +332,9 @@ uninstall-binPROGRAMS:
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 
-sqrun$(EXEEXT): $(sqrun_OBJECTS) $(sqrun_DEPENDENCIES) $(EXTRA_sqrun_DEPENDENCIES) 
-	@rm -f sqrun$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(sqrun_OBJECTS) $(sqrun_LDADD) $(LIBS)
+sqexec$(EXEEXT): $(sqexec_OBJECTS) $(sqexec_DEPENDENCIES) $(EXTRA_sqexec_DEPENDENCIES) 
+	@rm -f sqexec$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(sqexec_OBJECTS) $(sqexec_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

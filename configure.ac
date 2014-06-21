@@ -8,7 +8,9 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
   Makefile
   src/libsqasm/Makefile
+  src/libsqrun/Makefile
   src/sqasm/Makefile
+  src/sqexec/Makefile
   src/sqrun/Makefile
 ])
 AC_OUTPUT

@@ -1,23 +1,25 @@
 #pragma once
 
+#include <limits>
+
 #include "common/formatter.hpp"
 
 template<typename T>
-bool tryLexicalCast(const string &str, T &value)
+bool tryLexicalCast(const std::string &str, T &value)
 {
-    istringstream stream;
+    std::istringstream stream;
     stream.str(str);
     stream >> value;
     return stream.rdbuf()->in_avail() == 0;
 }
 
 template<typename T>
-T lexicalCast(const string &str)
+T lexicalCast(const std::string &str)
 {
     T value;
     if (!tryLexicalCast(str, value))
     {
-        throw runtime_error(Formatter() << "Could not convert " << str);
+        throw std::runtime_error(Formatter() << "Could not convert " << str);
     }
     return value;
 }
@@ -25,10 +27,10 @@ T lexicalCast(const string &str)
 template<typename Target, typename Source = int>
 static Target castInt(Source value)
 {
-    if (value < numeric_limits<Target>::min() ||
-        value > numeric_limits<Target>::max())
+    if (value < std::numeric_limits<Target>::min() ||
+        value > std::numeric_limits<Target>::max())
     {
-        throw out_of_range(Formatter() << "Value " << value << " out of range");
+        throw std::out_of_range(Formatter() << "Value " << value << " out of range");
     }
     return static_cast<Target>(value);
 }

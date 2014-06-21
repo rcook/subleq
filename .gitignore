@@ -4,8 +4,11 @@ config.h
 config.log
 config.status
 src/libsqasm/.deps/
+src/libsqrun/.deps/
 src/sqasm/.deps/
 src/sqasm/sqasm
+src/sqexec/.deps/
+src/sqexec/sqexec
 src/sqrun/.deps/
 src/sqrun/sqrun
 stamp-h1

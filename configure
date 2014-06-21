@@ -4135,7 +4135,7 @@ AM_CXXFLAGS="-std=c++11 -I.. -Werror -Wall"
 
 ac_config_headers="$ac_config_headers config.h"
 
-ac_config_files="$ac_config_files Makefile src/libsqasm/Makefile src/sqasm/Makefile src/sqrun/Makefile"
+ac_config_files="$ac_config_files Makefile src/libsqasm/Makefile src/libsqrun/Makefile src/sqasm/Makefile src/sqexec/Makefile src/sqrun/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -4870,7 +4870,9 @@ do
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/libsqasm/Makefile") CONFIG_FILES="$CONFIG_FILES src/libsqasm/Makefile" ;;
+    "src/libsqrun/Makefile") CONFIG_FILES="$CONFIG_FILES src/libsqrun/Makefile" ;;
     "src/sqasm/Makefile") CONFIG_FILES="$CONFIG_FILES src/sqasm/Makefile" ;;
+    "src/sqexec/Makefile") CONFIG_FILES="$CONFIG_FILES src/sqexec/Makefile" ;;
     "src/sqrun/Makefile") CONFIG_FILES="$CONFIG_FILES src/sqrun/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
