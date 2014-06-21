@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqasm", "src\sqasm\sqasm.vcxproj", "{679D669C-9833-4D94-8D6B-A4CE58CCB209}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqexec", "src\sqexec\sqexec.vcxproj", "{FE7C1162-A76F-4ED6-91A7-E2F9F22739FD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqrun", "src\sqrun\sqrun.vcxproj", "{68046F8B-3DE2-4995-989D-DD9FBCE5B988}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsqrun", "src\libsqrun\libsqrun.vcxproj", "{D9355B70-41C3-4E8A-8844-6D8731D37045}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsqasm", "src\libsqasm\libsqasm.vcxproj", "{B7C9C9A9-B256-44E4-BB0E-DF284D5CB504}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{2FA9E5F0-3AC6-4820-B8E6-210B1D92527C}"
+	ProjectSection(SolutionItems) = preProject
+		src\common\formatter.hpp = src\common\formatter.hpp
+		src\common\util.hpp = src\common\util.hpp
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{679D669C-9833-4D94-8D6B-A4CE58CCB209}.Debug|Win32.ActiveCfg = Debug|Win32
+		{679D669C-9833-4D94-8D6B-A4CE58CCB209}.Debug|Win32.Build.0 = Debug|Win32
+		{679D669C-9833-4D94-8D6B-A4CE58CCB209}.Release|Win32.ActiveCfg = Release|Win32
+		{679D669C-9833-4D94-8D6B-A4CE58CCB209}.Release|Win32.Build.0 = Release|Win32
+		{FE7C1162-A76F-4ED6-91A7-E2F9F22739FD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE7C1162-A76F-4ED6-91A7-E2F9F22739FD}.Debug|Win32.Build.0 = Debug|Win32
+		{FE7C1162-A76F-4ED6-91A7-E2F9F22739FD}.Release|Win32.ActiveCfg = Release|Win32
+		{FE7C1162-A76F-4ED6-91A7-E2F9F22739FD}.Release|Win32.Build.0 = Release|Win32
+		{68046F8B-3DE2-4995-989D-DD9FBCE5B988}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68046F8B-3DE2-4995-989D-DD9FBCE5B988}.Debug|Win32.Build.0 = Debug|Win32
+		{68046F8B-3DE2-4995-989D-DD9FBCE5B988}.Release|Win32.ActiveCfg = Release|Win32
+		{68046F8B-3DE2-4995-989D-DD9FBCE5B988}.Release|Win32.Build.0 = Release|Win32
+		{D9355B70-41C3-4E8A-8844-6D8731D37045}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D9355B70-41C3-4E8A-8844-6D8731D37045}.Debug|Win32.Build.0 = Debug|Win32
+		{D9355B70-41C3-4E8A-8844-6D8731D37045}.Release|Win32.ActiveCfg = Release|Win32
+		{D9355B70-41C3-4E8A-8844-6D8731D37045}.Release|Win32.Build.0 = Release|Win32
+		{B7C9C9A9-B256-44E4-BB0E-DF284D5CB504}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B7C9C9A9-B256-44E4-BB0E-DF284D5CB504}.Debug|Win32.Build.0 = Debug|Win32
+		{B7C9C9A9-B256-44E4-BB0E-DF284D5CB504}.Release|Win32.ActiveCfg = Release|Win32
+		{B7C9C9A9-B256-44E4-BB0E-DF284D5CB504}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
