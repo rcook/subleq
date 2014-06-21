@@ -3,6 +3,7 @@ autom4te.cache/
 config.h
 config.log
 config.status
+src/libsqasm/.deps/
 src/sqasm/.deps/
 src/sqasm/sqasm
 src/sqrun/.deps/
@@ -10,5 +11,6 @@ src/sqrun/sqrun
 stamp-h1
 tmp/
 
+*.a
 *.o
 

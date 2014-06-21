@@ -92,7 +92,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sqasm_OBJECTS = main.$(OBJEXT)
 sqasm_OBJECTS = $(am_sqasm_OBJECTS)
-sqasm_LDADD = $(LDADD)
+sqasm_DEPENDENCIES = ../libsqasm/libsqasm.a
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -247,6 +247,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 sqasm_SOURCES = ../common/formatter.hpp ../common/util.hpp main.cpp
+sqasm_LDADD = ../libsqasm/libsqasm.a
 all: all-am
 
 .SUFFIXES:
