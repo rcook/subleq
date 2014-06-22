@@ -49,7 +49,7 @@ void Runner::run(vector<char> &instructions, const bool trace)
 
         if (a < 0 || b < -1)
         {
-            pc = -1;
+            break;
         }
         else if (b == -1)
         {

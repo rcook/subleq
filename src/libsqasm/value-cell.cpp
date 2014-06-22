@@ -19,7 +19,7 @@ string ValueCell::toString() const
     return Formatter() << "[value " << m_value << "]";
 }
 
-int ValueCell::emit(const map<string, int> &symbolTable) const
+int ValueCell::emit(const map<string, int> & /*symbolTable*/) const
 {
     return m_value;
 }
