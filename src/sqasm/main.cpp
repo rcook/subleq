@@ -8,24 +8,24 @@ using namespace std;
 #include "common/formatter.hpp"
 #include "libsqasm/assembler.hpp"
 
-static void emit(const string &fileName, const vector<char> &instructions)
+static void emit(const string &fileName, const vector<char> &ops)
 {
     cout << "Emitting object file " << fileName << endl;
 
     ofstream file(fileName);
-    for (auto instruction : instructions)
+    for (auto op : ops)
     {
-        file << setw(5) << static_cast<int>(instruction) << endl;
+        file << setw(5) << static_cast<int>(op) << endl;
     }
 }
 
 static void assemble(const string &fileName)
 {
-    vector<char> instructions;
-    Assembler::assemble(fileName, instructions);
+    vector<char> ops;
+    Assembler::assemble(fileName, ops);
 
     string outputFileName = Formatter() << fileName << "obj";
-    emit(outputFileName, instructions);
+    emit(outputFileName, ops);
 }
 
 int main(int argc, char *argv[])

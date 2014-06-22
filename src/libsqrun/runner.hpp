@@ -4,6 +4,6 @@
 
 namespace Runner
 {
-    void run(vector<char> &instructions, const bool trace = false);
+    void run(vector<char> &ops, const bool trace = false);
 }
 

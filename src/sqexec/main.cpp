@@ -8,9 +8,9 @@ using namespace std;
 
 static void assemble(const string &fileName)
 {
-    vector<char> instructions;
-    Assembler::assemble(fileName, instructions);
-    Runner::run(instructions);
+    vector<char> ops;
+    Assembler::assemble(fileName, ops);
+    Runner::run(ops);
 }
 
 int main(int argc, char *argv[])

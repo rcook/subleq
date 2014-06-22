@@ -19,33 +19,33 @@ static void dump(const string &message, char a, char b, char c)
         " C = " << static_cast<int>(c) <<endl;
 }
 
-static void dump(const vector<char> &instructions, const size_t columnCount = 3)
+static void dump(const vector<char> &ops, const size_t columnCount = 3)
 {
-    for (size_t i = 0; i < instructions.size(); i += columnCount)
+    for (size_t i = 0; i < ops.size(); i += columnCount)
     {
         cout << setw(4) << i << ":";
-        auto upper = min(i + columnCount, instructions.size());
+        auto upper = min(i + columnCount, ops.size());
         for (auto j = i; j < upper; ++j)
         {
-            cout << " " << setw(4) << static_cast<int>(instructions[j]);
+            cout << " " << setw(4) << static_cast<int>(ops[j]);
         }
         cout << endl;
     }
 }
 
-void Runner::run(vector<char> &instructions, const bool trace)
+void Runner::run(vector<char> &ops, const bool trace)
 {
-    for (size_t pc = 0; pc >= 0 && pc < instructions.size(); )
+    for (size_t pc = 0; pc >= 0 && pc < ops.size();)
     {
         if (trace)
         {
             cout << "pc = " << pc << endl;
-            dump(instructions);
+            dump(ops);
         }
 
-        auto a = instructions[pc];
-        auto b = instructions[pc + 1];
-        auto c = instructions[pc + 2];
+        auto a = ops[pc];
+        auto b = ops[pc + 1];
+        auto c = ops[pc + 2];
 
         if (a < 0 || b < -1)
         {
@@ -53,17 +53,17 @@ void Runner::run(vector<char> &instructions, const bool trace)
         }
         else if (b == -1)
         {
-            cout << instructions[a];
+            cout << ops[a];
             pc = c;
         }
         else
         {
             if (trace)
             {
-                dump("subleq", instructions[a], instructions[b], c);
+                dump("subleq", ops[a], ops[b], c);
             }
-            instructions[b] -= instructions[a];
-            if (instructions[b] > 0)
+            ops[b] -= ops[a];
+            if (ops[b] > 0)
             {
                 pc += 3;
             }
