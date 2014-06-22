@@ -96,6 +96,7 @@ am__v_AR_1 =
 libsqasm_a_AR = $(AR) $(ARFLAGS)
 libsqasm_a_LIBADD =
 am_libsqasm_a_OBJECTS = assembler.$(OBJEXT) cell.$(OBJEXT) \
+	compilation-data.$(OBJEXT) compilation-data-builder.$(OBJEXT) \
 	symbol-ref-cell.$(OBJEXT) value-cell.$(OBJEXT)
 libsqasm_a_OBJECTS = $(am_libsqasm_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -264,6 +265,10 @@ libsqasm_a_SOURCES = ../common/util.hpp \
 										 assembler.hpp \
 										 cell.cpp \
 										 cell.hpp \
+										 compilation-data.cpp \
+										 compilation-data.hpp \
+										 compilation-data-builder.cpp \
+										 compilation-data-builder.hpp \
 										 symbol-ref-cell.cpp \
 										 symbol-ref-cell.hpp \
 										 value-cell.cpp \
@@ -320,6 +325,8 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/assembler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cell.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compilation-data-builder.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/compilation-data.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/symbol-ref-cell.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/value-cell.Po@am__quote@
 
