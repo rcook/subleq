@@ -21,11 +21,10 @@ static void emit(const string &fileName, const vector<char> &ops)
 
 static void assemble(const string &fileName)
 {
-    vector<char> ops;
-    Assembler::assemble(fileName, ops);
+    auto compilationData(Assembler::assemble(fileName));
 
     string outputFileName = Formatter() << fileName << "obj";
-    emit(outputFileName, ops);
+    emit(outputFileName, compilationData->ops());
 }
 
 int main(int argc, char *argv[])

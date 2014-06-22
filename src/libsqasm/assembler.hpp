@@ -1,12 +1,11 @@
 #pragma once
 
+#include <memory>
 #include <string>
-#include <vector>
+
+#include "compilation-data.hpp"
 
 namespace Assembler
 {
-    void assemble(
-        const std::string &fileName,
-        std::vector<char> &ops,
-        const bool dumpSymbols = false);
+    std::unique_ptr<CompilationData> assemble(const std::string &fileName);
 }

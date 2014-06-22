@@ -78,12 +78,16 @@
   <ItemGroup>
     <ClCompile Include="assembler.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="compilation-data-builder.cpp" />
+    <ClCompile Include="compilation-data.cpp" />
     <ClCompile Include="symbol-ref-cell.cpp" />
     <ClCompile Include="value-cell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assembler.hpp" />
     <ClInclude Include="cell.hpp" />
+    <ClInclude Include="compilation-data-builder.hpp" />
+    <ClInclude Include="compilation-data.hpp" />
     <ClInclude Include="symbol-ref-cell.hpp" />
     <ClInclude Include="value-cell.hpp" />
   </ItemGroup>

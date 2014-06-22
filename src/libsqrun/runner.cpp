@@ -33,19 +33,21 @@ static void dump(const vector<char> &ops, const size_t columnCount = 3)
     }
 }
 
-void Runner::run(vector<char> &ops, const bool trace)
+void Runner::run(const vector<char> &ops, const bool debug)
 {
-    for (size_t pc = 0; pc >= 0 && pc < ops.size();)
+    vector<char> mutableOps(ops);
+
+    for (size_t pc = 0; pc >= 0 && pc < mutableOps.size();)
     {
-        if (trace)
+        if (debug)
         {
             cout << "pc = " << pc << endl;
-            dump(ops);
+            dump(mutableOps);
         }
 
-        auto a = ops[pc];
-        auto b = ops[pc + 1];
-        auto c = ops[pc + 2];
+        auto a = mutableOps[pc];
+        auto b = mutableOps[pc + 1];
+        auto c = mutableOps[pc + 2];
 
         if (a < 0 || b < -1)
         {
@@ -53,17 +55,17 @@ void Runner::run(vector<char> &ops, const bool trace)
         }
         else if (b == -1)
         {
-            cout << ops[a];
+            cout << mutableOps[a];
             pc = c;
         }
         else
         {
-            if (trace)
+            if (debug)
             {
-                dump("subleq", ops[a], ops[b], c);
+                dump("subleq", mutableOps[a], mutableOps[b], c);
             }
-            ops[b] -= ops[a];
-            if (ops[b] > 0)
+            mutableOps[b] -= mutableOps[a];
+            if (mutableOps[b] > 0)
             {
                 pc += 3;
             }

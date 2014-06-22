@@ -5,15 +5,18 @@
 #include <map>
 #include <memory>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 #include "assembler.hpp"
 #include "common/util.hpp"
 #include "cell.hpp"
+#include "compilation-data.hpp"
+#include "compilation-data-builder.hpp"
 #include "symbol-ref-cell.hpp"
 #include "value-cell.hpp"
 
-static void parseToken(const string &token, int address, map<string, int> &symbolTable, vector<unique_ptr<Cell>> &cells)
+static void parseToken(const string &token, int address, CompilationDataBuilder &builder)
 {
     size_t colonIndex = token.find(':');
     string valueStr(colonIndex == string::npos ? token : token.substr(colonIndex + 1));
@@ -23,21 +26,21 @@ static void parseToken(const string &token, int address, map<string, int> &symbo
     {
         string symbol(token.substr(0, colonIndex));
         string valueStr(token.substr(colonIndex + 1));
-        symbolTable.insert(make_pair(symbol, address));
+        builder.symbolTable().insert(make_pair(symbol, address));
     }
 
     int value;
     if (tryLexicalCast(valueStr, value))
     {
-        cells.push_back(unique_ptr<Cell>(new ValueCell(address, value)));
+        builder.cells().push_back(unique_ptr<Cell>(new ValueCell(address, value)));
     }
     else
     {
-        cells.push_back(unique_ptr<Cell>(new SymbolRefCell(address, valueStr)));
+        builder.cells().push_back(unique_ptr<Cell>(new SymbolRefCell(address, valueStr)));
     }
 }
 
-static void tokenizeCodeSection(ifstream &file, int &address, int &lineNumber, map<string, int> &symbolTable, vector<unique_ptr<Cell>> &cells)
+static void tokenizeCodeSection(ifstream &file, int &address, int &lineNumber, CompilationDataBuilder &builder)
 {
     string line;
     for (; getline(file, line); ++lineNumber)
@@ -69,19 +72,19 @@ static void tokenizeCodeSection(ifstream &file, int &address, int &lineNumber, m
         switch (tokenCount)
         {
         case 1:
-            parseToken(tokens[0], address + 0, symbolTable, cells);
-            parseToken(tokens[0], address + 1, symbolTable, cells);
-            cells.push_back(unique_ptr<Cell>(new ValueCell(address + 2, address + 3)));
+            parseToken(tokens[0], address + 0, builder);
+            parseToken(tokens[0], address + 1, builder);
+            builder.cells().push_back(unique_ptr<Cell>(new ValueCell(address + 2, address + 3)));
             break;
         case 2:
-            parseToken(tokens[0], address + 0, symbolTable, cells);
-            parseToken(tokens[1], address + 1, symbolTable, cells);
-            cells.push_back(unique_ptr<Cell>(new ValueCell(address + 2, address + 3)));
+            parseToken(tokens[0], address + 0, builder);
+            parseToken(tokens[1], address + 1, builder);
+            builder.cells().push_back(unique_ptr<Cell>(new ValueCell(address + 2, address + 3)));
             break;
         case 3:
-            parseToken(tokens[0], address + 0, symbolTable, cells);
-            parseToken(tokens[1], address + 1, symbolTable, cells);
-            parseToken(tokens[2], address + 2, symbolTable, cells);
+            parseToken(tokens[0], address + 0, builder);
+            parseToken(tokens[1], address + 1, builder);
+            parseToken(tokens[2], address + 2, builder);
             break;
         default:
             throw runtime_error("Unexpected");
@@ -91,7 +94,7 @@ static void tokenizeCodeSection(ifstream &file, int &address, int &lineNumber, m
     }
 }
 
-static void tokenizeDataSection(ifstream &file, int &address, int &lineNumber, map<string, int> &symbolTable, vector<unique_ptr<Cell>> &cells)
+static void tokenizeDataSection(ifstream &file, int &address, int &lineNumber, CompilationDataBuilder &builder)
 {
     string line;
     for (; getline(file, line); ++lineNumber)
@@ -100,54 +103,34 @@ static void tokenizeDataSection(ifstream &file, int &address, int &lineNumber, m
         string token;
         while (stream >> token)
         {
-            parseToken(token, address, symbolTable, cells);
+            parseToken(token, address, builder);
             ++address;
         }
     }
 }
 
-static void emit(const map<string, int> &symbolTable, const vector<unique_ptr<Cell>> &cells, vector<char> &ops)
+static void emit(CompilationDataBuilder &builder)
 {
-    ops.reserve(cells.size());
-    for (auto &cell : cells)
+    builder.ops().reserve(builder.cells().size());
+    for (auto &cell : builder.cells())
     {
-        int op = cell->emit(symbolTable);
-        ops.push_back(castInt<char>(op));
+        int op = cell->emit(builder.symbolTable());
+        builder.ops().push_back(castInt<char>(op));
     }
 }
 
-void Assembler::assemble(const string &fileName, vector<char> &ops, const bool dumpSymbols)
+unique_ptr<CompilationData> Assembler::assemble(const string &fileName)
 {
-    map<string, int> symbolTable;
-    vector<unique_ptr<Cell>> cells;
+    CompilationDataBuilder builder;
 
     ifstream file(fileName);
     int address = 0;
     int lineNumber = 0;
 
-    tokenizeCodeSection(file, address, lineNumber, symbolTable, cells);
-    tokenizeDataSection(file, address, lineNumber, symbolTable, cells);
+    tokenizeCodeSection(file, address, lineNumber, builder);
+    tokenizeDataSection(file, address, lineNumber, builder);
 
-    if (dumpSymbols)
-    {
-        if (!symbolTable.empty())
-        {
-            cout << "Symbol table" << endl;
-            for (auto &pair : symbolTable)
-            {
-                cout << "  symbol: " << pair.first << " = " << pair.second << endl;
-            }
-        }
+    emit(builder);
 
-        if (!cells.empty())
-        {
-            cout << "Cells" << endl;
-            for (auto &cell : cells)
-            {
-                cout << "  cell: " << cell->toString() << endl;
-            }
-        }
-    }
-
-    emit(symbolTable, cells, ops);
+    return builder.create();
 }

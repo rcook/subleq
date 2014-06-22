@@ -6,11 +6,31 @@ using namespace std;
 #include "libsqasm/assembler.hpp"
 #include "libsqrun/runner.hpp"
 
-static void assemble(const string &fileName)
+static void assemble(const string &fileName, const bool debug = false)
 {
-    vector<char> ops;
-    Assembler::assemble(fileName, ops);
-    Runner::run(ops);
+    auto compilationData(Assembler::assemble(fileName));
+    Runner::run(compilationData->ops());
+
+    if (debug)
+    {
+        if (!compilationData->symbolTable().empty())
+        {
+            cout << "Symbol table" << endl;
+            for (auto &pair : compilationData->symbolTable())
+            {
+                cout << "  symbol: " << pair.first << " = " << pair.second << endl;
+            }
+        }
+
+        if (!compilationData->cells().empty())
+        {
+            cout << "Cells" << endl;
+            for (auto &cell : compilationData->cells())
+            {
+                cout << "  cell: " << cell->toString() << endl;
+            }
+        }
+    }
 }
 
 int main(int argc, char *argv[])
