@@ -51,7 +51,7 @@ static void tokenizeCodeSection(ifstream &file, int &address, int &lineNumber, m
         string tokens[3];
         istringstream stream(line);
         string token;
-        int tokenCount = 0;
+        size_t tokenCount = 0;
         while (stream >> token)
         {
             if (tokenCount >= extent<decltype(tokens)>::value)
