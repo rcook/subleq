@@ -21,7 +21,7 @@ static void run(const string &fileName)
 {
     vector<char> ops;
     load(fileName, ops);
-    Runner::run(ops);
+    Runner::run(false, ops, map<string, int>());
 }
 
 int main(int argc, char *argv[])

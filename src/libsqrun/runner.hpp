@@ -1,9 +1,13 @@
 #pragma once
 
+#include <map>
 #include <vector>
 
 namespace Runner
 {
-    void run(const vector<char> &ops, const bool debug = false);
+    void run(
+        const bool debug,
+        const std::vector<char> &ops,
+        const std::map<std::string, int> &symbolTable);
 }
 

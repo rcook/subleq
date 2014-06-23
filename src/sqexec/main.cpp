@@ -9,7 +9,10 @@ using namespace std;
 static void assemble(const string &fileName, const bool debug)
 {
     auto compilationData(Assembler::assemble(fileName));
-    Runner::run(compilationData->ops(), debug);
+    Runner::run(
+        debug,
+        compilationData->ops(),
+        compilationData->symbolTable());
 }
 
 int main(int argc, char *argv[])
