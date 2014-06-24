@@ -4,7 +4,7 @@
 
 class SymbolRefCell : public Cell
 {
-    SymbolRefCell();
+    SymbolRefCell() = delete;
     SymbolRefCell(const SymbolRefCell &) = delete;
     SymbolRefCell &operator=(const SymbolRefCell &) = delete;
     SymbolRefCell(SymbolRefCell &&) = delete;

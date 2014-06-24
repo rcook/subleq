@@ -4,7 +4,7 @@
 
 class ValueCell : public Cell
 {
-    ValueCell();
+    ValueCell() = delete;
     ValueCell(const ValueCell &) = delete;
     ValueCell &operator=(const ValueCell &) = delete;
     ValueCell(ValueCell &&) = delete;
