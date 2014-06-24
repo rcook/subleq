@@ -4,7 +4,7 @@
 using namespace std;
 
 #include "common/util.hpp"
-#include "libsqrun/runner.hpp"
+#include "libsqrun/vm.hpp"
 
 static void load(const string &fileName, vector<char> &ops)
 {
@@ -21,7 +21,7 @@ static void run(const string &fileName)
 {
     vector<char> ops;
     load(fileName, ops);
-    Runner::run(false, ops, map<string, int>());
+    VM::run(false, ops, map<string, int>());
 }
 
 int main(int argc, char *argv[])

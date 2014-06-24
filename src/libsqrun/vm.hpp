@@ -3,7 +3,7 @@
 #include <map>
 #include <vector>
 
-namespace Runner
+namespace VM
 {
     void run(
         const bool debug,

@@ -4,12 +4,12 @@
 using namespace std;
 
 #include "libsqasm/assembler.hpp"
-#include "libsqrun/runner.hpp"
+#include "libsqrun/vm.hpp"
 
 static void assemble(const string &fileName, const bool debug)
 {
     auto compilationData(Assembler::assemble(fileName));
-    Runner::run(
+    VM::run(
         debug,
         compilationData->ops(),
         compilationData->symbolTable());

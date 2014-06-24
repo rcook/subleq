@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-#include "runner.hpp"
+#include "vm.hpp"
 #include "common/util.hpp"
 
 static void listBreakpoints(const set<size_t> &breakpoints)
@@ -64,7 +64,7 @@ static void tokenizeDebugInput(const string &command, vector<string> &tokens)
     }
 }
 
-void Runner::run(
+void VM::run(
     const bool debug,
     const vector<char> &ops,
     const map<string, int> &symbolTable)
