@@ -19,6 +19,7 @@ public:
     bool interrupt(size_t pc, char a, char b, char c);
 
 private:
+    std::string prettyOperand(char op) const;
     void tokenizeInput(const string &input, vector<string> &tokens) const;
     void printBreakpoints() const;
     void printSymbols() const;

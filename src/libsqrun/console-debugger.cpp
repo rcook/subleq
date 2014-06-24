@@ -44,8 +44,8 @@ bool ConsoleDebugger::interrupt(size_t pc, char a, char b, char c)
     }
 
     cout << "# subleq " <<
-        " A = " << static_cast<int>(a) <<
-        " B = " << static_cast<int>(b) <<
+        " A = " << prettyOperand(a) <<
+        " B = " << prettyOperand(b) <<
         " C = " << static_cast<int>(c) << endl;
 
     for (;;)
@@ -168,6 +168,21 @@ bool ConsoleDebugger::interrupt(size_t pc, char a, char b, char c)
             << "r (registers)" << endl
             << "s (step)" << endl;
     }
+}
+
+string ConsoleDebugger::prettyOperand(char op) const
+{
+    Formatter builder;
+    builder << static_cast<int>(op);
+    if (static_cast<size_t>(op) >= m_memorySize)
+    {
+        builder << " (?)";
+    }
+    else
+    {
+        builder << " (" << static_cast<int>(m_memory[op]) << ")";
+    }
+    return builder;
 }
 
 void ConsoleDebugger::tokenizeInput(const string &input, vector<string> &tokens) const
