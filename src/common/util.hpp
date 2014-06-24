@@ -1,16 +1,9 @@
 #pragma once
 
+#include <algorithm>
 #include <limits>
 
 #include "common/formatter.hpp"
-
-template<typename Predicate>
-string trim(const string &str, Predicate isspacePredicate)
-{
-    auto beginIter(find_if_not(str.begin(), str.end(), isspacePredicate));
-    auto endIter(find_if(beginIter, str.end(), isspacePredicate));
-    return string(beginIter, endIter);
-}
 
 template<typename T>
 bool tryLexicalCast(const std::string &str, T &value)
