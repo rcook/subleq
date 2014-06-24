@@ -1,3 +1,7 @@
+// Copyright (C) 2014, Richard Cook.
+// See licence at following location for details:
+// https://github.com/rcook/subleq/blob/master/LICENSE
+
 using namespace std;
 
 #include "compilation-data.hpp"
