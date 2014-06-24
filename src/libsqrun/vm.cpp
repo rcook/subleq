@@ -1,16 +1,9 @@
-#include <algorithm>
-#include <fstream>
-#include <iomanip>
 #include <iostream>
-#include <limits>
-#include <set>
-#include <stdexcept>
-#include <string>
+#include <vector>
 using namespace std;
 
 #include "vm.hpp"
 #include "console-debugger.hpp"
-#include "common/util.hpp"
 
 void VM::run(
     const bool debug,
@@ -20,7 +13,7 @@ void VM::run(
     vector<char> memory(ops);
     size_t memorySize(memory.size());
 
-    ConsoleDebugger *debugger = new ConsoleDebugger(debug, symbolTable, memory);
+    ConsoleDebugger debugger(debug, symbolTable, memory);
 
     for (size_t pc = 0; pc >= 0 && pc < memorySize;)
     {
@@ -28,7 +21,7 @@ void VM::run(
         auto b = memory[pc + 1];
         auto c = memory[pc + 2];
 
-        if (!debugger->interrupt(pc, a, b, c))
+        if (!debugger.interrupt(pc, a, b, c))
         {
             break;
         }
@@ -56,4 +49,3 @@ void VM::run(
         }
     }
 }
-

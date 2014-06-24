@@ -6,7 +6,6 @@
 class ConsoleDebugger
 {
     ConsoleDebugger() = delete;
-    ~ConsoleDebugger() = delete;
     ConsoleDebugger(const ConsoleDebugger &) = delete;
     ConsoleDebugger &operator=(const ConsoleDebugger &) = delete;
     ConsoleDebugger(ConsoleDebugger &&) = delete;
@@ -14,6 +13,7 @@ class ConsoleDebugger
 
 public:
     ConsoleDebugger(bool enabled, const std::map<std::string, int> &symbolTable, vector<char> &memory);
+    ~ConsoleDebugger();
 
 public:
     bool interrupt(size_t pc, char a, char b, char c);

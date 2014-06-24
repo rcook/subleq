@@ -22,6 +22,10 @@ ConsoleDebugger::ConsoleDebugger(
 {
 }
 
+ConsoleDebugger::~ConsoleDebugger()
+{
+}
+
 bool ConsoleDebugger::interrupt(size_t pc, char a, char b, char c)
 {
     if (!m_enabled)
@@ -159,7 +163,7 @@ bool ConsoleDebugger::interrupt(size_t pc, char a, char b, char c)
             << "bp <address> (set breakpoint)" << endl
             << "c (continue)" << endl
             << "m (memory)" << endl
-            << "p (print)" << endl
+            << "p (print symbols)" << endl
             << "q (quit)" << endl
             << "r (registers)" << endl
             << "s (step)" << endl;
