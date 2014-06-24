@@ -60,9 +60,10 @@ void Runner::run(
             for (;;)
             {
                 cout << "pc = " << pc << " > ";
-                string command;
-                cin >> command;
+                string temp;
+                getline(cin, temp);
 
+                string command(trim(temp, isspace));
                 if (command.compare("c") == 0)
                 {
                     stepping = false;
@@ -90,8 +91,11 @@ void Runner::run(
                 }
                 else
                 {
-                    cout << "Unrecognized command " << command << endl
-                        << "Available commands:" << endl
+                    if (!command.empty())
+                    {
+                        cout << "Unrecognized command " << command << endl;
+                    }
+                    cout << "Available commands:" << endl
                         << "c (continue)" << endl
                         << "m (memory)" << endl
                         << "p (print)" << endl
